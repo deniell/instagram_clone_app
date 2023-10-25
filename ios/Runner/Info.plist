@@ -2,6 +2,24 @@
 <!DOCTYPE plist PUBLIC "-//Apple//DTD PLIST 1.0//EN" "http://www.apple.com/DTDs/PropertyList-1.0.dtd">
 <plist version="1.0">
 <dict>
+    <key>CFBundleURLTypes</key>
+    <array>
+      <dict>
+          <key>CFBundleTypeRole</key>
+          <string>Editor</string>
+          <key>CFBundleURLSchemes</key>
+          <array>
+            <string>fb231952292967229</string>
+            <string>com.googleusercontent.apps.280571477275-irqou8brsbo3o8uicp34boajbb0ak26i</string>
+          </array>
+      </dict>
+    </array>
+    <key>FacebookAppID</key>
+    <string>231952292967229</string>
+    <key>FacebookClientToken</key>
+    <string>132596c48e4cb9c9f27364824fab13c2</string>
+    <key>FacebookDisplayName</key>
+    <string>Instagram Clone App</string>
     <key>LSApplicationQueriesSchemes</key>
     <array>
       <string>fbapi</string>
@@ -9,19 +27,6 @@
       <string>fbauth2</string>
       <string>fbshareextension</string>
     </array>
-    <key>CFBundleURLTypes</key>
-    <array>
-      <dict>
-      <key>CFBundleURLSchemes</key>
-      <array>
-        <string>fb231952292967229</string>
-      </array>
-      </dict>
-    </array>
-    <key>FacebookAppID</key>
-    <string>231952292967229</string>
-    <key>FacebookDisplayName</key>
-    <string>Instagram Clone App</string>
 	<key>CFBundleDevelopmentRegion</key>
 	<string>$(DEVELOPMENT_LANGUAGE)</string>
 	<key>CFBundleDisplayName</key>
