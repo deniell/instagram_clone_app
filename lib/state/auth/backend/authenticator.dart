@@ -5,20 +5,31 @@ import 'package:instagram_clone_app/state/auth/constants/constants.dart';
 import 'package:instagram_clone_app/state/auth/models/auth_result.dart';
 import 'package:instagram_clone_app/state/posts/typedefs/user_id.dart';
 
+///
+/// All authentication logic is here
+///
 class Authenticator {
   UserId? get userId => FirebaseAuth.instance.currentUser?.uid;
   bool get isAlreadyLoggedIn => userId != null;
   String get displayName => FirebaseAuth.instance.currentUser?.displayName ?? '';
   String? get email => FirebaseAuth.instance.currentUser?.email;
 
+  ///
+  /// Sign out with all possible methods
+  ///
   Future<void> singOut() async {
     await FirebaseAuth.instance.signOut();
     await GoogleSignIn().signOut();
     await FacebookAuth.instance.logOut();
   }
 
+  ///
+  /// Login with Facebook
+  ///
   Future<AuthResult> loginWithFacebook() async {
+    // show user Facebook login dialog for interaction
     final loginResult = await FacebookAuth.instance.login();
+    // get token from result
     final token = loginResult.accessToken?.token;
     if (token == null) {
       // user has aborted the logging in process
