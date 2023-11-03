@@ -14,10 +14,12 @@ class Authenticator {
   String get displayName => FirebaseAuth.instance.currentUser?.displayName ?? '';
   String? get email => FirebaseAuth.instance.currentUser?.email;
 
+  const Authenticator();
+
   ///
   /// Sign out with all possible methods
   ///
-  Future<void> singOut() async {
+  Future<void> logOut() async {
     await FirebaseAuth.instance.signOut();
     await GoogleSignIn().signOut();
     await FacebookAuth.instance.logOut();
