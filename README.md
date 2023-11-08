@@ -1,4 +1,4 @@
-# instagram_clone_app
+# Instagram Clone App
 Flutter app, which clone some Instagram features.
 
 Based on youtube tutorial: https://www.youtube.com/watch?v=vtGCteFYs4M
