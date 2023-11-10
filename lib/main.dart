@@ -81,13 +81,13 @@ class MainView extends StatelessWidget {
 }
 
 // for login
-class LoginView extends StatelessWidget {
+class LoginView extends ConsumerWidget {
   const LoginView({
     super.key,
   });
 
   @override
-  Widget build(BuildContext context) {
+  Widget build(BuildContext context, WidgetRef ref) {
     return Scaffold(
       appBar: AppBar(
         title: const Text('Login View'),
@@ -95,19 +95,13 @@ class LoginView extends StatelessWidget {
       body: Column(
         children: [
           TextButton(
-            onPressed: () async {
-              final result = await const Authenticator().loginWithGoogle();
-              result.log();
-            },
+            onPressed: ref.read(authStateProvider.notifier).loginWithGoogle,
             child: const Text(
               'Sign In with Google',
             ),
           ),
           TextButton(
-            onPressed: () async {
-              final result = await const Authenticator().loginWithFacebook();
-              result.log();
-            },
+            onPressed: ref.read(authStateProvider.notifier).loginWithFacebook,
             child: const Text(
               'Sign In with Facebook',
             ),

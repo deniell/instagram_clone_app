@@ -22,12 +22,18 @@ class AuthStateNotifier extends StateNotifier<AuthState> {
     }
   }
 
+  ///
+  /// Log Out
+  ///
   Future<void> logOut() async {
     state = state.copiedWithIsLoading(true);
     await _authenticator.logOut();
     state = const AuthState.unknown();
   }
 
+  ///
+  /// Login with Google
+  ///
   Future<void> loginWithGoogle() async {
     state = state.copiedWithIsLoading(true);
     // try to login
@@ -43,6 +49,27 @@ class AuthStateNotifier extends StateNotifier<AuthState> {
     );
   }
 
+  ///
+  /// Login with Facebook
+  ///
+  Future<void> loginWithFacebook() async {
+    state = state.copiedWithIsLoading(true);
+    // try to login
+    final result = await _authenticator.loginWithFacebook();
+    final userId = _authenticator.userId;
+    if (result == AuthResult.success && userId != null) {
+      await saveUserInfo(userId: userId);
+    }
+    state = AuthState(
+      result: result,
+      isLoading: false,
+      userId: userId,
+    );
+  }
+
+  ///
+  /// Save User Info to Firebase
+  ///
   Future<void> saveUserInfo({required UserId userId}) =>
       _userInfoStorage.saveUserInfo(
         userId: userId,
