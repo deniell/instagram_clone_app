@@ -6,14 +6,20 @@ import 'package:instagram_clone_app/state/posts/typedefs/user_id.dart';
 import 'package:instagram_clone_app/state/user_info/backend/user_info_storage.dart';
 
 ///
-/// Authorization state
+/// Responsible for keeping app AuthState and emitting events of type AuthState
+/// to notify listeners about the app auth state changes,
+/// depends on actions, which user took on UI.
 ///
 class AuthStateNotifier extends StateNotifier<AuthState> {
   final _authenticator = const Authenticator();
   final _userInfoStorage = const UserInfoStorage();
 
+  ///
+  /// Constructor with default AuthState value.
+  ///
   AuthStateNotifier() : super(const AuthState.unknown()) {
     if (_authenticator.isAlreadyLoggedIn) {
+      // notify about state changes (emit event of type AuthState)
       state = AuthState(
         result: AuthResult.success,
         isLoading: false,
@@ -26,8 +32,10 @@ class AuthStateNotifier extends StateNotifier<AuthState> {
   /// Log Out
   ///
   Future<void> logOut() async {
+    // notify about state changes (emit event of type AuthState)
     state = state.copiedWithIsLoading(true);
     await _authenticator.logOut();
+    // notify about state changes (emit event of type AuthState)
     state = const AuthState.unknown();
   }
 
@@ -35,6 +43,7 @@ class AuthStateNotifier extends StateNotifier<AuthState> {
   /// Login with Google
   ///
   Future<void> loginWithGoogle() async {
+    // notify about state changes (emit event of type AuthState)
     state = state.copiedWithIsLoading(true);
     // try to login
     final result = await _authenticator.loginWithGoogle();
@@ -42,6 +51,7 @@ class AuthStateNotifier extends StateNotifier<AuthState> {
     if (result == AuthResult.success && userId != null) {
       await saveUserInfo(userId: userId);
     }
+    // notify about state changes (emit event of type AuthState)
     state = AuthState(
       result: result,
       isLoading: false,
@@ -53,6 +63,7 @@ class AuthStateNotifier extends StateNotifier<AuthState> {
   /// Login with Facebook
   ///
   Future<void> loginWithFacebook() async {
+    // notify about state changes (emit event of type AuthState)
     state = state.copiedWithIsLoading(true);
     // try to login
     final result = await _authenticator.loginWithFacebook();
@@ -60,6 +71,7 @@ class AuthStateNotifier extends StateNotifier<AuthState> {
     if (result == AuthResult.success && userId != null) {
       await saveUserInfo(userId: userId);
     }
+    // notify about state changes (emit event of type AuthState)
     state = AuthState(
       result: result,
       isLoading: false,

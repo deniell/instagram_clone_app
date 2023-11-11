@@ -2,6 +2,9 @@ import 'package:flutter/foundation.dart' show immutable;
 import 'package:instagram_clone_app/state/auth/models/auth_result.dart';
 import 'package:instagram_clone_app/state/posts/typedefs/user_id.dart';
 
+///
+/// Represent current authentication state of the app.
+///
 @immutable
 class AuthState {
   final AuthResult? result;

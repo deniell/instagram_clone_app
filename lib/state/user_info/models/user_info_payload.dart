@@ -3,6 +3,11 @@ import 'package:flutter/foundation.dart' show immutable;
 import 'package:instagram_clone_app/state/constants/firebase_field_name.dart';
 import 'package:instagram_clone_app/state/posts/typedefs/user_id.dart';
 
+
+///
+/// Util class for easily mapping User information to json for Firebase,
+/// (serialize user info without proxy for storing in Firebase).
+///
 @immutable
 class UserInfoPayload extends MapView<String, String> {
   UserInfoPayload({

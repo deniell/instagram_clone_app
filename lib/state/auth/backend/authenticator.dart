@@ -6,7 +6,7 @@ import 'package:instagram_clone_app/state/auth/models/auth_result.dart';
 import 'package:instagram_clone_app/state/posts/typedefs/user_id.dart';
 
 ///
-/// All authentication logic is here
+/// Contain all app authentication business logic.
 ///
 class Authenticator {
   UserId? get userId => FirebaseAuth.instance.currentUser?.uid;
@@ -17,7 +17,7 @@ class Authenticator {
   const Authenticator();
 
   ///
-  /// Sign out with all possible methods
+  /// Sign out with all possible methods.
   ///
   Future<void> logOut() async {
     await FirebaseAuth.instance.signOut();
@@ -26,7 +26,7 @@ class Authenticator {
   }
 
   ///
-  /// Login with Facebook
+  /// Login with Facebook.
   ///
   Future<AuthResult> loginWithFacebook() async {
     // show user Facebook login dialog for interaction
@@ -46,6 +46,8 @@ class Authenticator {
     } on FirebaseAuthException catch (e) {
       // for Federated authentication use case:
       // allow user login with same email address using Google or Facebook
+      // Facebook specific. If you do not do this, you will be not able to login
+      // to Facebook with same email, which you already logged in to Google.
       final email = e.email;
       final credential = e.credential;
       if (e.code == Constants.accountExistsWithDifferentCredential &&
@@ -64,6 +66,9 @@ class Authenticator {
     }
   }
 
+  ///
+  /// Login with Google.
+  ///
   Future<AuthResult> loginWithGoogle() async {
     final GoogleSignIn googleSignIn = GoogleSignIn(scopes: [
       Constants.emailScope,

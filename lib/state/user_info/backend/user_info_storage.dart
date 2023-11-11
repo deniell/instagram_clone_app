@@ -5,6 +5,10 @@ import 'package:instagram_clone_app/state/constants/firebase_field_name.dart';
 import 'package:instagram_clone_app/state/posts/typedefs/user_id.dart';
 import 'package:instagram_clone_app/state/user_info/models/user_info_payload.dart';
 
+
+///
+/// Responsible for updating user infor in Firebase.
+///
 @immutable
 class UserInfoStorage {
   const UserInfoStorage();
