@@ -1,9 +1,8 @@
 import 'dart:async';
 
-import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:gap/gap.dart';
-import 'package:instagram_clone_app/views/components/constants/strings.dart';
+import 'package:instagram_clone_app/views/constants/strings.dart';
 import 'package:instagram_clone_app/views/components/loading/loading_screen_controller.dart';
 
 class LoadingScreen {
