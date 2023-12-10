@@ -4,6 +4,9 @@ import 'package:instagram_clone_app/state/image_upload/models/file_type.dart';
 import 'package:instagram_clone_app/state/post_settings/models/post_settings.dart';
 import 'package:instagram_clone_app/state/posts/models/post_key.dart';
 
+///
+/// Post entity
+///
 @immutable
 class Post {
   final String postId;
@@ -41,4 +44,7 @@ class Post {
                     .firstWhere((element) => element.storageKey == entry.key):
                 entry.value,
         };
+
+  bool get allowLikes => postSettings[PostSetting.allowLikes] ?? false;
+  bool get allowComments => postSettings[PostSetting.allowComments] ?? false;
 }
