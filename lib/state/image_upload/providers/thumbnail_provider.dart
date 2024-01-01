@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:hooks_riverpod/hooks_riverpod.dart';
 import 'package:instagram_clone_app/state/image_upload/exceptions/could_not_build_thumbnail_exception.dart';
-import 'package:instagram_clone_app/state/image_upload/get_image_aspect_ratio.dart';
+import 'package:instagram_clone_app/state/image_upload/extensions/get_image_aspect_ratio.dart';
 import 'package:instagram_clone_app/state/image_upload/models/file_type.dart';
 import 'package:instagram_clone_app/state/image_upload/models/image_with_aspect_ratio.dart';
 import 'package:instagram_clone_app/state/image_upload/models/thumbnail_request.dart';
