@@ -3,7 +3,8 @@ import 'package:instagram_clone_app/state/image_upload/notifiers/image_upload_no
 import 'package:instagram_clone_app/state/image_upload/typedefs/is_loading.dart';
 
 ///
-/// Provider, which notify listeners of [ImageUploadNotifier] about [IsLoading] state
+/// Provider, which notify listeners of [ImageUploadNotifier] about
+/// [IsLoading] state.
 ///
 final imageUploaderProvider =
     StateNotifierProvider<ImageUploadNotifier, IsLoading>(
