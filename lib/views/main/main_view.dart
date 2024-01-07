@@ -2,9 +2,13 @@ import 'package:flutter/material.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import 'package:hooks_riverpod/hooks_riverpod.dart';
 import 'package:instagram_clone_app/state/auth/providers/auth_state_provider.dart';
+import 'package:instagram_clone_app/state/image_upload/helpers/image_picker_helper.dart';
+import 'package:instagram_clone_app/state/image_upload/models/file_type.dart';
+import 'package:instagram_clone_app/state/post_settings/providers/post_settings_provider.dart';
 import 'package:instagram_clone_app/views/components/dialogs/alert_dialog_model.dart';
 import 'package:instagram_clone_app/views/components/dialogs/logout_dialog.dart';
 import 'package:instagram_clone_app/views/constants/strings.dart';
+import 'package:instagram_clone_app/views/create_new_post/create_new_post_view.dart';
 import 'package:instagram_clone_app/views/tabs/users_posts/users_post_view.dart';
 
 ///
@@ -24,13 +28,69 @@ class MainView extends ConsumerWidget {
           ),
           actions: [
             IconButton(
-              onPressed: () async {},
+              onPressed: () async {
+                // pick a video
+                final videoFile =
+                    await ImagePickerHelper.pickVideoFromGallery();
+
+                if (videoFile == null) {
+                  return;
+                }
+
+                // reset [postSettingsProvider] provider for following post,
+                // which we are going to create
+                ref.refresh(postSettingsProvider);
+
+                // if this widget is not mounted do nothing
+                if (!context.mounted) {
+                  return;
+                }
+
+                // got to the Crate New Post page
+                Navigator.push(
+                  context,
+                  MaterialPageRoute(
+                    builder: (_) => CreateNewPostView(
+                      fileToPost: videoFile,
+                      fileType: FileType.video,
+                    ),
+                  ),
+                );
+              },
               icon: const FaIcon(
                 FontAwesomeIcons.film,
               ),
             ),
             IconButton(
-              onPressed: () async {},
+              onPressed: () async {
+                // pick a image
+                final imageFile =
+                await ImagePickerHelper.pickImageFromGallery();
+
+                if (imageFile == null) {
+                  return;
+                }
+
+                // reset [postSettingsProvider] provider for following post,
+                // which we are going to create
+                ref.refresh(postSettingsProvider);
+
+                // if this widget is not mounted do nothing
+                if (!context.mounted) {
+                  return;
+                }
+
+                // got to the Crate New Post page
+                Navigator.push(
+                  context,
+                  MaterialPageRoute(
+                    builder: (_) => CreateNewPostView(
+                      fileToPost: imageFile,
+                      fileType: FileType.image,
+                    ),
+                  ),
+                );
+              },
               icon: const Icon(
                 Icons.add_photo_alternate_outlined,
               ),

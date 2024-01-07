@@ -7,9 +7,14 @@ import 'package:instagram_clone_app/state/auth/providers/user_id_provider.dart';
 import 'package:instagram_clone_app/state/image_upload/models/file_type.dart';
 import 'package:instagram_clone_app/state/image_upload/models/thumbnail_request.dart';
 import 'package:instagram_clone_app/state/image_upload/providers/image_uploader_provider.dart';
+import 'package:instagram_clone_app/state/post_settings/models/post_settings.dart';
 import 'package:instagram_clone_app/state/post_settings/providers/post_settings_provider.dart';
+import 'package:instagram_clone_app/views/components/file_thumbnail_view.dart';
 import 'package:instagram_clone_app/views/constants/strings.dart';
 
+///
+/// Widget, which represents UI for Create New Post page.
+///
 class CreateNewPostView extends StatefulHookConsumerWidget {
   final File fileToPost;
   final FileType fileType;
@@ -88,6 +93,45 @@ class _CreateNewPostViewState extends ConsumerState<CreateNewPostView> {
             icon: const Icon(Icons.send),
           ),
         ],
+      ),
+      body: SingleChildScrollView(
+        child: Column(
+          crossAxisAlignment: CrossAxisAlignment.stretch,
+          children: [
+            // thumbnail
+            FileThumbnailView(
+              thumbnailRequest: thumbnailRequest,
+            ),
+            // text editing field
+            Padding(
+              padding: const EdgeInsets.all(8),
+              child: TextField(
+                decoration: const InputDecoration(
+                  labelText: Strings.pleaseWriteYourMessageHere,
+                ),
+                autofocus: true,
+                maxLines: null,
+                controller: postController,
+              ),
+            ),
+            // post settings section
+            ...PostSetting.values.map(
+              (postSetting) => ListTile(
+                title: Text(postSetting.title),
+                subtitle: Text(postSetting.description),
+                trailing: Switch(
+                  value: postSettings[postSetting] ?? false,
+                  onChanged: (isOn) {
+                    ref.read(postSettingsProvider.notifier).setSetting(
+                          postSetting,
+                          isOn,
+                        );
+                  },
+                ),
+              ),
+            ),
+          ],
+        ),
       ),
     );
   }
