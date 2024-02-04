@@ -2,12 +2,14 @@
 <!DOCTYPE plist PUBLIC "-//Apple//DTD PLIST 1.0//EN" "http://www.apple.com/DTDs/PropertyList-1.0.dtd">
 <plist version="1.0">
 <dict>
+    <key>NSPhotoLibraryUsageDescription</key>
+    <string>$(PRODUCT_NAME) would like to access your photos</string>
     <key>CFBundleURLTypes</key>
     <array>
       <dict>
           <key>CFBundleTypeRole</key>
           <string>Editor</string>
-          <key>CFBundleURLSchemes</key>
+          <key>CFBundleURLSchemes</key>f
           <array>
             <string>fb231952292967229</string>
             <string>com.googleusercontent.apps.280571477275-irqou8brsbo3o8uicp34boajbb0ak26i</string>

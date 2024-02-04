@@ -1,5 +1,6 @@
 import 'package:hooks_riverpod/hooks_riverpod.dart';
 import 'package:instagram_clone_app/state/auth/providers/auth_state_provider.dart';
+import 'package:instagram_clone_app/state/image_upload/providers/image_uploader_provider.dart';
 import 'package:instagram_clone_app/state/image_upload/typedefs/is_loading.dart';
 
 ///
@@ -7,6 +8,7 @@ import 'package:instagram_clone_app/state/image_upload/typedefs/is_loading.dart'
 ///
 final isLoadingProvider = Provider<IsLoading>((ref) {
   final authState = ref.watch(authStateProvider);
+  final isUploadingImage = ref.watch(imageUploaderProvider);
 
-  return authState.isLoading;
+  return authState.isLoading || isUploadingImage;
 });
