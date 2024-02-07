@@ -4,6 +4,9 @@ import 'package:instagram_clone_app/state/comments/typedefs/comment_id.dart';
 import 'package:instagram_clone_app/state/constants/firebase_collection_name.dart';
 import 'package:instagram_clone_app/state/image_upload/typedefs/is_loading.dart';
 
+///
+/// State notifier, which delete comment and update IsLoading state.
+///
 class DeleteCommentStateNotifier extends StateNotifier<IsLoading> {
   DeleteCommentStateNotifier() : super(false);
 
