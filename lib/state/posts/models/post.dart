@@ -5,7 +5,7 @@ import 'package:instagram_clone_app/state/post_settings/models/post_settings.dar
 import 'package:instagram_clone_app/state/posts/models/post_key.dart';
 
 ///
-/// Post entity
+/// Post entity.
 ///
 @immutable
 class Post {
