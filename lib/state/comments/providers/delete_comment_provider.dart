@@ -3,7 +3,7 @@ import 'package:instagram_clone_app/state/comments/notifiers/delete_comment_noti
 import 'package:instagram_clone_app/state/image_upload/typedefs/is_loading.dart';
 
 ///
-/// Provider, which help to delete comments.
+/// Provider, which help to delete comment.
 ///
 final deleteCommentProvider =
     StateNotifierProvider<DeleteCommentStateNotifier, IsLoading>(

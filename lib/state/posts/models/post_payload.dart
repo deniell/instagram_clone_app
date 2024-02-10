@@ -8,7 +8,7 @@ import 'package:instagram_clone_app/state/posts/models/post_key.dart';
 import 'package:instagram_clone_app/state/posts/typedefs/user_id.dart';
 
 ///
-/// Class, which helps us serialize Post data to payload.
+/// Class, which helps us to serialize Post data to Firebase payload.
 ///
 @immutable
 class PostPayload extends MapView<String, dynamic> {
