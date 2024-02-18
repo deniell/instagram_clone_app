@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:instagram_clone_app/state/posts/models/post.dart';
 import 'package:instagram_clone_app/views/components/posts/post_thumbnail_view.dart';
+import 'package:instagram_clone_app/views/post_comments/post_comments_view.dart';
 
 ///
 /// Widget responsible for displaying a grid of posts thumbnails
@@ -29,6 +30,12 @@ class PostsGridView extends StatelessWidget {
           post: post,
           onTapped: () {
             // TODO: navigate to the post details view
+            Navigator.push(
+              context,
+              MaterialPageRoute(
+                builder: (_) => PostCommentsView(postId: post.postId),
+              ),
+            );
           },
         );
       },

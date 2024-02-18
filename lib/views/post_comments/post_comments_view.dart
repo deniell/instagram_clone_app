@@ -6,6 +6,10 @@ import 'package:instagram_clone_app/state/comments/models/post_comments_request.
 import 'package:instagram_clone_app/state/comments/providers/post_comments_provider.dart';
 import 'package:instagram_clone_app/state/comments/providers/send_comment_provider.dart';
 import 'package:instagram_clone_app/state/posts/typedefs/post_id.dart';
+import 'package:instagram_clone_app/views/components/animations/empty_contents_with_text_animation_view.dart';
+import 'package:instagram_clone_app/views/components/animations/error_animation_view.dart';
+import 'package:instagram_clone_app/views/components/animations/loading_animation_view.dart';
+import 'package:instagram_clone_app/views/components/comment/comment_tile.dart';
 import 'package:instagram_clone_app/views/constants/strings.dart';
 import 'package:instagram_clone_app/views/extensions/dismiss_keyboard.dart';
 
@@ -65,7 +69,78 @@ class PostCommentsView extends HookConsumerWidget {
           ),
         ],
       ),
-      body: Placeholder(),
+      body: SafeArea(
+        child: Flex(
+          direction: Axis.vertical,
+          children: [
+            Expanded(
+              flex: 4,
+              child: comments.when(
+                data: (comments) {
+                  if (comments.isEmpty) {
+                    return const SingleChildScrollView(
+                      child: EmptyContentsWithAnimationView(
+                        text: Strings.noCommentsYet,
+                      ),
+                    );
+                  }
+                  return RefreshIndicator(
+                    child: ListView.builder(
+                      padding: const EdgeInsets.all(8),
+                      itemCount: comments.length,
+                        itemBuilder: (context, index) {
+                          final comment = comments.elementAt(index);
+                          return CommentTile(comment: comment);
+                        },
+                    ),
+                    onRefresh: () {
+                      ref.refresh(
+                        postCommentsProvider(
+                          request.value,
+                        ),
+                      );
+                      return Future.delayed(
+                        const Duration(seconds: 1),
+                      );
+                    },
+                  );
+                },
+                error: (error, stackTrace) {
+                  return const ErrorAnimationView();
+                },
+                loading: () {
+                  return const LoadingAnimationView();
+                },
+              ),
+            ),
+            Expanded(
+              flex: 1,
+              child: Align(
+                alignment: Alignment.bottomCenter,
+                child: Padding(
+                  padding: const EdgeInsets.only(left: 8, right: 8),
+                  child: TextField(
+                    textInputAction: TextInputAction.send,
+                    controller: commentController,
+                    onSubmitted: (comment) {
+                      if (comment.isNotEmpty) {
+                        _submitCommentWithController(
+                          commentController,
+                          ref,
+                        );
+                      }
+                    },
+                    decoration: const InputDecoration(
+                      border: OutlineInputBorder(),
+                      labelText: Strings.writeYourCommentHere,
+                    ),
+                  ),
+                ),
+              ),
+            )
+          ],
+        ),
+      ),
     );
   }
 
